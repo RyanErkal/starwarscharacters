@@ -188,6 +188,7 @@ function App() {
 		}
 		return (
 			<p>
+				<strong>Films</strong>
 				{props.curfilms.map((film) => (
 					<li>{film}</li>
 				))}
@@ -206,12 +207,30 @@ function App() {
 				<div className="characterdisplay">
 					<div className="character">
 						<h2>{cur.name}</h2>
-						<p>Height: {cur.height}</p>
-						<p>Mass: {cur.mass}</p>
-						<p>Hair Color: {cur.hair_color}</p>
-						<p>Lightsaber Color: {cur.lightsaber_color}</p>
-						<p>Homeworld: {cur.homeworld}</p>
-						<p>Species: {cur.species}</p>
+						<p>
+							<strong>Height: </strong>
+							{cur.height}
+						</p>
+						<p>
+							<strong>Mass: </strong>
+							{cur.mass}
+						</p>
+						<p>
+							<strong>Hair Color: </strong>
+							{cur.hair_color}
+						</p>
+						<p>
+							<strong>Lightsaber Color: </strong>
+							{cur.lightsaber_color}
+						</p>
+						<p>
+							<strong>Homeworld: </strong>
+							{cur.homeworld}
+						</p>
+						<p>
+							<strong>Species: </strong>
+							{cur.species}
+						</p>
 						<DisplayFilms curfilms={cur.films} />
 					</div>
 				</div>
