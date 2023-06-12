@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import uniqueId from "uniqueid";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+	const [currentCharacter, setCurrentCharacter] = useState("");
 	const [characters, setCharacters] = useState([
 		{
 			name: "Obi-Wan Kenobi",
@@ -178,12 +178,50 @@ function App() {
 		},
 	]);
 
-	const [selectedCharacter, setSelectedCharacter] = useState(null);
-	let id = useState(uniqueId);
+	useEffect(() => {
+		DisplayCharacterDetails();
+	}, [currentCharacter]);
+
+	function DisplayFilms(props) {
+		if (currentCharacter === "") {
+			return null;
+		}
+		return (
+			<p>
+				{props.curfilms.map((film) => (
+					<li>{film}</li>
+				))}
+			</p>
+		);
+	}
+
+	function DisplayCharacterDetails() {
+		if (currentCharacter === "") {
+			return <p>Please select a character</p>;
+		} else {
+			let cur = characters.find(
+				(character) => character.name === currentCharacter
+			);
+			return (
+				<div className="characterdisplay">
+					<div className="character">
+						<h2>{cur.name}</h2>
+						<p>Height: {cur.height}</p>
+						<p>Mass: {cur.mass}</p>
+						<p>Hair Color: {cur.hair_color}</p>
+						<p>Lightsaber Color: {cur.lightsaber_color}</p>
+						<p>Homeworld: {cur.homeworld}</p>
+						<p>Species: {cur.species}</p>
+						<DisplayFilms curfilms={cur.films} />
+					</div>
+				</div>
+			);
+		}
+	}
 
 	return (
 		<div className="App">
-			<select onChange={(e) => setSelectedCharacter(e.target.value)}>
+			<select onChange={(e) => setCurrentCharacter(e.target.value)}>
 				<option value="">Select a character</option>
 				{characters.map((character) => (
 					<option value={character.name}>{character.name}</option>
@@ -192,21 +230,7 @@ function App() {
 
 			<h1>Star Wars Characters</h1>
 			<p>Click on a character to view their details.</p>
-
-			<div className="characterdisplay">
-				{characters.map((character) => (
-					<div className="character" key={id}>
-						<h2>{character.name}</h2>
-						<p>Height: {character.height}</p>
-						<p>Mass: {character.mass}</p>
-						<p>Hair Color: {character.hair_color}</p>
-						<p>Lightsaber Color: {character.lightsaber_color}</p>
-						<p>Homeworld: {character.homeworld}</p>
-						<p>Species: {character.species}</p>
-						<p>Films: {character.films}</p>
-					</div>
-				))}
-			</div>
+			<DisplayCharacterDetails />
 		</div>
 	);
 }
