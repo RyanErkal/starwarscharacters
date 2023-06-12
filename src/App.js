@@ -196,6 +196,46 @@ function App() {
 		);
 	}
 
+	function LightSaberColor(props) {
+		if (props.lightsaber_color === "red") {
+			return (
+				<p>
+					<strong>LightSaber Color:</strong>{" "}
+					<span style={{ color: "red" }}>
+						{props.lightsaber_color}
+					</span>
+				</p>
+			);
+		} else if (props.lightsaber_color === "blue") {
+			return (
+				<p>
+					<strong>LightSaber Color:</strong>{" "}
+					<span style={{ color: "blue" }}>
+						{props.lightsaber_color}
+					</span>
+				</p>
+			);
+		} else if (props.lightsaber_color === "green") {
+			return (
+				<p>
+					<strong>LightSaber Color:</strong>{" "}
+					<span style={{ color: "green" }}>
+						{props.lightsaber_color}
+					</span>
+				</p>
+			);
+		} else {
+			return (
+				<p>
+					<strong>LightSaber Color:</strong>{" "}
+					<span style={{ color: "black" }}>
+						{props.lightsaber_color}
+					</span>
+				</p>
+			);
+		}
+	}
+
 	function DisplayCharacterDetails() {
 		if (currentCharacter === "") {
 			return <p>Please select a character</p>;
@@ -219,10 +259,13 @@ function App() {
 							<strong>Hair Color: </strong>
 							{cur.hair_color}
 						</p>
-						<p>
+						<LightSaberColor
+							lightsaber_color={cur.lightsaber_color}
+						/>
+						{/* <p>
 							<strong>Lightsaber Color: </strong>
 							{cur.lightsaber_color}
-						</p>
+						</p> */}
 						<p>
 							<strong>Homeworld: </strong>
 							{cur.homeworld}
@@ -248,7 +291,6 @@ function App() {
 			</select>
 
 			<h1>Star Wars Characters</h1>
-			<p>Click on a character to view their details.</p>
 			<DisplayCharacterDetails />
 		</div>
 	);
